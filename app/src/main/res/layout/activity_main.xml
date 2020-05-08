@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayoput xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Space
+        android:id="@+id/Space1"
+        android:layout_width="match_parent"
+
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+
+        android:layout_below="@id/Space1"
+        android:text="정답이 나올 " />
+
+    <TableLayout
+        android:id="@+id/selectTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TextView"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:stretchColumns="0,1,2,3">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bt1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bt5"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt6"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt7"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt8"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bt9"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt10"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt11"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt12"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bt13"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt14"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt15"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+            <Button
+                android:id="@+id/bt16"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/bt_backg" />
+
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/selectTable"
+        android:text="결과가 보여지게"
+        android:textSize="30sp" />
+
+</RelativeLayoput>
