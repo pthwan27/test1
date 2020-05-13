@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayoput xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="40dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Space
         android:id="@+id/Space1"
         android:layout_width="match_parent"
-
         android:layout_height="50dp" />
 
     <TextView
-        android:id="@+id/TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-
+        android:id="@+id/quiztext"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_below="@id/Space1"
-        android:text="정답이 나올 " />
+        android:gravity="center"
+        android:text="into result"
+        android:textSize="35sp" />
+
+    <Space
+        android:id="@+id/Space2"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/quiztext" />
 
     <TableLayout
         android:id="@+id/selectTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/TextView"
+        android:layout_below="@id/Space2"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
@@ -39,31 +47,39 @@
 
             <Button
                 android:id="@+id/bt1"
-                android:layout_width="80dp"
+                android:layout_width="84dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt2"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt3"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt4"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
         </TableRow>
 
@@ -76,28 +92,36 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt6"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt7"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt8"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
         </TableRow>
 
         <TableRow
@@ -109,28 +133,36 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt10"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt11"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt12"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
         </TableRow>
 
         <TableRow
@@ -142,38 +174,60 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt14"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt15"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt16"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="1dp"
-                android:background="@drawable/bt_backg" />
+                android:background="@drawable/bt_background"
+                android:onClick="onClick"
+                android:textSize="20sp" />
 
         </TableRow>
     </TableLayout>
+
+    <Space
+        android:id="@+id/Space3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/selectTable" />
 
     <TextView
         android:id="@+id/resultText"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_below="@id/selectTable"
-        android:text="결과가 보여지게"
+        android:layout_below="@id/Space3"
+        android:gravity="center"
         android:textSize="30sp" />
 
-</RelativeLayoput>
+    <TextView
+        android:id="@+id/resultText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/resultText"
+        android:gravity="center"
+        android:text="TextView" />
+
+</RelativeLayout>
