@@ -10,12 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     int count = 3;
     String calStr = "";
+    Long answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,34 +27,16 @@ public class MainActivity extends AppCompatActivity {
         setting();
 
         //3초뒤에 숫자가 안보기도록 하기위해서.
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 16; i++) {
-                    Button bt = findViewById(R.id.bt1 + i);
-                    bt.setTextColor(Color.WHITE);
-                }
-            }
-        }, 3000);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int i = 0; i < 16; i++) {
+//                    Button bt = findViewById(R.id.bt1 + i);
+//                    bt.setTextColor(Color.WHITE);
+//                }
+//            }
+//        }, 3000);
 
-        //버튼에 있는 숫자를 배열에 저장해둔뒤
-        // 배열을 가지고 모든 답을 구한뒤 그 중에 문제에 대한 정답 하나를 뽑아온다.
-        int[] numarr = new int[10];
-        int temp = 0;
-        for (int i = 0; i < 16; i++) {
-            Button bt = (Button) findViewById(R.id.bt1 + i);
-            //Character.isDigit -> if CharAt(0) is num TRUE , else False
-            if (Character.isDigit(bt.getText().toString().charAt(0))) {
-                numarr[temp] = Integer.parseInt(bt.getText().toString());
-                temp++;
-            } else continue;
-        }
-
-        //정답으로 맞춰야 될 숫자.
-        long answer = calc(numarr);
-
-        TextView quiztext = (TextView) findViewById(R.id.quiztext);
-        quiztext.setText(String.valueOf(answer));
     }
 
     private void setting() {
@@ -62,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 16; ) {
             boolean check = false;
-            int num = random.nextInt(55) + 2; //2~57
+            int num = random.nextInt(20) + 2; //2~22
             for (int j = 0; j < checkarr.length; j++) {
                 if (checkarr[j] == num) {
                     check = false;
@@ -111,6 +95,26 @@ public class MainActivity extends AppCompatActivity {
             } else {
             }
         }
+
+
+        int[] numarr = new int[10];
+        temp = 0;
+        for (int i = 0; i < 16; i++) {
+            Button bt = (Button) findViewById(R.id.bt1 + i);
+            //Character.isDigit -> if CharAt(0) is num TRUE , else False
+            if (Character.isDigit(bt.getText().toString().charAt(0))) {
+                numarr[temp] = Integer.parseInt(bt.getText().toString());
+                temp++;
+            } else continue;
+        }
+
+        //버튼에 있는 숫자를 배열에 저장해둔뒤
+        // 배열을 가지고 모든 답을 구한뒤 그 중에 문제에 대한 정답 하나를 뽑아온다.
+        //정답으로 맞춰야 될 숫자.
+        answer = calc(numarr);
+
+        TextView quiztext = (TextView) findViewById(R.id.quiztext);
+        quiztext.setText(String.valueOf(answer));
     }
 
     private static long calc(int[] numarr) {
@@ -161,20 +165,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Random random = new Random();
+        //temp 는 어디에 있는 숫자를 뽑아올지 위치를 나타내는 숫자
+        //temp2 는 temp위치에 있는 숫자
         int temp = random.nextInt(answerArr.size());
         long temp2 = answerArr.get(temp);
-        while (temp2 == 0) {
+
+        //정답으로 나오는 숫자가 클릭할 수 있는 숫자랑 똑같은 숫자가 나오지 않도록
+        ArrayList<Long> numarrlist = new ArrayList<>();
+        for (long temp3 : numarr) {
+            numarrlist.add(temp3);
+        }
+
+        while (temp2 == 0 || temp2 == 1 || numarrlist.contains(temp2)) {
             temp = random.nextInt(answerArr.size());
             temp2 = answerArr.get(temp);
         }
+
         return temp2;
     }
 
     public void onClick(View view) {
         TextView resulttext = (TextView) findViewById(R.id.resultText);
+        //계산식 보여주는 tv
+        TextView resulttext2 = (TextView) findViewById(R.id.resultText2);
+        //정답인지 아닌지 안내문구 보여주는 tv
 
         Button bt = (Button) view;
         calStr += bt.getText().toString() + " ";
+        //계산식
+
+        resulttext.setText(calStr);
         count--;
 
         if (count == 0) {
@@ -182,12 +202,9 @@ public class MainActivity extends AppCompatActivity {
             String[] calarr = new String[3];
             calarr = calStr.split(" ");
 
-            // if (Character.isDigit(bt.getText().toString().charAt(0))) {
-
             if (Character.isDigit(calarr[0].charAt(0)) && !Character.isDigit(calarr[1].charAt(0)) && Character.isDigit(calarr[2].charAt(0))) {
                 resulttext.setText(calStr);
-
-                int temp = 0;
+                long temp = 0;
                 switch (calarr[1]) {
                     case "+":
                         temp = Integer.parseInt(calarr[0]) + Integer.parseInt(calarr[2]);
@@ -208,18 +225,28 @@ public class MainActivity extends AppCompatActivity {
                         double a, b;
                         a = Double.parseDouble(calarr[0]);
                         b = Double.parseDouble(calarr[2]);
-                        temp = (int) Math.pow(a, b);
+                        if ((long) Math.pow(a, b) > 2100000000) {
+                            resulttext.setText("X X X 범위초과 X X X");
+                        } else {
+                            temp = (long) Math.pow(a, b);
+                        }
                         break;
                     }
                 }
-                TextView resulttv = (TextView)findViewById(R.id.resultText2);
-                resulttv.setText(String.valueOf(temp));
-            }
-            else{
-                    resulttext.setText("X X X 잘못된 식 X X X");
+                if (temp == answer) {
+                    resulttext.setText(calStr + " = " + String.valueOf(temp));
+                    resulttext2.setText("정답입니다");
+                    setting();
+                } else {
+                    resulttext.setText(calStr + " = ?");
+                    resulttext2.setText("오답입니다");
                 }
-                calStr = "";
-                count = 3;
+
+            } else {
+                resulttext.setText("X X X 잘못된 식 X X X");
             }
+            calStr = "";
+            count = 3;
         }
     }
+}
