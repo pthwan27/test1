@@ -2,6 +2,7 @@ package com.example.createanswer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,12 +20,21 @@ public class MainActivity extends AppCompatActivity {
     String calStr = "";
     Long answer;
 
+    int playercheck = 0;
+    int player1score = 10;
+    int player2score = 10;
+    String player1, player2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         setting();
+        Intent intent = getIntent();
+        player1 = intent.getStringExtra("player1");
+        player2 = intent.getStringExtra("player2");
+
 
         //3초뒤에 숫자가 안보기도록 하기위해서.
 //        new Handler().postDelayed(new Runnable() {
@@ -185,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
+
         TextView resulttext = (TextView) findViewById(R.id.resultText);
         //계산식 보여주는 tv
         TextView resulttext2 = (TextView) findViewById(R.id.resultText2);
@@ -197,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
         resulttext.setText(calStr);
         count--;
 
+        //3번 눌렀을 때 계산이 되게함.
         if (count == 0) {
             //계산.
             String[] calarr = new String[3];
@@ -237,6 +249,12 @@ public class MainActivity extends AppCompatActivity {
                     resulttext.setText(calStr + " = " + String.valueOf(temp));
                     resulttext2.setText("정답입니다");
                     setting();
+                    if(playercheck % 2 == 0){
+                        player1score--;
+                    }
+                    else{
+                        player2score--;
+                    }
                 } else {
                     resulttext.setText(calStr + " = ?");
                     resulttext2.setText("오답입니다");
@@ -247,6 +265,19 @@ public class MainActivity extends AppCompatActivity {
             }
             calStr = "";
             count = 3;
+
+
+            if(player1score == 0){
+                player1score = 10;
+                player2score = 10;
+                resulttext2.setText(player1 + "승리!");
+            }
+            else if(player2score ==0){
+                player1score = 10;
+                player2score = 10;
+                resulttext2.setText(player2 + "승리!");
+            }
+            else playercheck++;
         }
     }
 }
