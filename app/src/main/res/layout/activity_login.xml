@@ -6,63 +6,91 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <RelativeLayout
-        android:id="@+id/playerlayout1"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/nametv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true">
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/nanumbarunpenb"
+        android:gravity="center"
+        android:text="make answer!"
+        android:textSize="50sp" />
 
-        <EditText
-            android:id="@+id/player1text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignWithParentIfMissing="false"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="player1"
-            android:inputType="textPersonName" />
-
-        <Button
-            android:id="@+id/bt1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/player1text"
-            android:layout_centerHorizontal="true"
-            android:text="Button" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/playerlayout2"
+    <Space
+        android:id="@+id/sp1"
         android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/nametv" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/playerlayout1"
-        android:layout_toRightOf="@id/playerlayout1">
+        android:layout_below="@id/sp1"
+        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/player2text"
+        <RelativeLayout
+            android:id="@+id/playerlayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="player2"
-            android:inputType="textPersonName" />
+            android:layout_weight="0.5">
 
-        <Button
-            android:id="@+id/bt2"
+            <EditText
+                android:id="@+id/player1text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignWithParentIfMissing="false"
+                android:ems="10"
+                android:fontFamily="@font/nanumbarunpenb"
+                android:gravity="center"
+                android:hint="player1"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/bt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/player1text"
+                android:layout_centerHorizontal="true"
+                android:text="ok" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/playerlayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/player2text"
-            android:layout_centerHorizontal="true"
-            android:text="Button" />
+            android:layout_weight="0.5">
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/player2text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/nanumbarunpenb"
+                android:gravity="center"
+                android:hint="player2"
+                android:inputType="textPersonName" />
+
+
+            <Button
+                android:id="@+id/bt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/player2text"
+                android:layout_centerHorizontal="true"
+                android:text="ok" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/startbt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/playerlayout1"
+        android:layout_below="@id/LinearLayout"
         android:layout_centerHorizontal="true"
+        android:enabled="false"
         android:onClick="onClick"
         android:text="START" />
 
