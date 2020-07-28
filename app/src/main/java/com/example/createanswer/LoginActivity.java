@@ -31,6 +31,9 @@ public class LoginActivity extends AppCompatActivity {
         play1bt = (Button) findViewById(R.id.bt1);
         play2bt = (Button) findViewById(R.id.bt2);
 
+        play1bt.setEnabled(true);
+        play2bt.setEnabled(true);
+
 
         final Button startbt = (Button) findViewById(R.id.startbt);
         play1bt.setOnClickListener(new View.OnClickListener() {
@@ -42,9 +45,11 @@ public class LoginActivity extends AppCompatActivity {
                     play1et.setEnabled(false);
                     check1 = true;
                     play1bt.setText("cancel");
-                    if(play2et.isEnabled() == false){
+                    if(nameCheck(player2)){
                         startbt.setEnabled(true);
-                    }else;
+                    }else{
+                        startbt.setEnabled(false);
+                    }
                 } else if (play1et.isEnabled() && !nameCheck(player1)) {
                     Toast.makeText(getApplicationContext(), "at least 1 letters!", Toast.LENGTH_SHORT).show();
                 } else if (!play1et.isEnabled() && nameCheck(player1)) {
@@ -63,9 +68,11 @@ public class LoginActivity extends AppCompatActivity {
                     play2et.setEnabled(false);
                     check2 = true;
                     play2bt.setText("cancel");
-                    if(play1et.isEnabled() == false){
+                    if(nameCheck(player1)){
                         startbt.setEnabled(true);
-                    }else;
+                    }else{
+                        startbt.setEnabled(false);
+                    }
                 } else if (play2et.isEnabled() && !nameCheck(player2)) {
                     Toast.makeText(getApplicationContext(), "at least 1 letters!", Toast.LENGTH_SHORT).show();
                 } else if (!play2et.isEnabled() && nameCheck(player2)) {
@@ -89,9 +96,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private Boolean nameCheck(String player1) {
+    private Boolean nameCheck(String player) {
         boolean check1 = false;
-        if (player1 != null && player1.length() > 0) {
+        if (player != null && player.length() > 0) {
             check1 = true;
         }
         return check1;
