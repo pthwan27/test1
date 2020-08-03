@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     Long answer;//맞춰야할 정답
 
-    String[] backArr = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12","13","+", "-", "*", "/"};
+    String[] backArr = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "+", "-", "*", "/"};
 
     String[] frontArr = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"};
 
@@ -28,13 +29,17 @@ public class MainActivity extends AppCompatActivity {
     int count = 3; //계산식을 완성했을때 계산이 되도록 ex) 1 + 3 누르면 계산이됌.
     String calStr = ""; //계산식 저장
     int playercheck = 0; //2명의 플레이어가 있을때 누구의 순서인지 알기위해
-    int player1score = 3; // 3점따면 승리하도록 설정
-    int player2score = 3;
+    int player1score = 1; // 3점따면 승리하도록 설정
+    int player2score = 1;
     String player1 = "", player2 = ""; //Login activity에서 받아온 플레이어 이름.
 
     //player1,2 이름과 점수 표시하는 곳
     TextView P1text;
     TextView P2text;
+
+    //뒤로가기 2번눌렀을때 종료되도록하게함
+    private long backKeyPressedTime = 0;
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         P1text = (TextView) findViewById(R.id.p1text);
         P2text = (TextView) findViewById(R.id.p2text);
         P1text.setText(player1 + " score : " + String.valueOf(player1score));
-        P2text.setText(String.valueOf(player2score)+ " score : " + player2 );
+        P2text.setText(String.valueOf(player2score) + " score : " + player2);
     }
 
     private void setting() {
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < onlyNumarr.length; i++) {
-            onlyNumarr[i] = i + 1;
+            onlyNumarr[i] = i + 2;
         }
         //   3초뒤에 숫자가 안보기도록 하기위해서.
         ////        new Handler().postDelayed(new Runnable() {
@@ -91,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         ////                    bt.setTextColor(Color.WHITE);
         ////                }
         ////            }
-        ////        }, 3000);
+        ////        }, 2000);
 
         //버튼에 있는 숫자를 배열에 저장해둔뒤
         // 배열을 가지고 모든 답을 구한뒤 그 중에 문제에 대한 정답 하나를 뽑아온다.
@@ -261,11 +266,11 @@ public class MainActivity extends AppCompatActivity {
                             public void run() {
                                 nextQ();
                             }
-                        }, 3000);
+                        }, 2000);
                     } else {
                         player2score--;
                         turntext.setText(player2 + " turn");
-                        P2text.setText(String.valueOf(player2score)+ " : score  " + player2);
+                        P2text.setText(String.valueOf(player2score) + " : score  " + player2);
                         disable();
                         // 3초뒤에 nextQ
                         new Handler().postDelayed(new Runnable() {
@@ -273,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                             public void run() {
                                 nextQ();
                             }
-                        }, 3000);
+                        }, 2000);
                     }
                 } else {
                     if (playercheck % 2 == 0) {
@@ -291,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             reset();
                         }
-                    }, 3000);
+                    }, 2000);
                 }
 
             } else {
@@ -309,20 +314,20 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         reset();
                     }
-                }, 3000);
+                }, 2000);
             }
             calStr = "";
             count = 3;
 
             if (player1score == 0) {
-                player1score = 3;
-                player2score = 3;
+                player1score = 1;
+                player2score = 1;
                 playercheck++;
                 show(player1);
                 disable();
             } else if (player2score == 0) {
-                player1score = 3;
-                player2score = 3;
+                player1score = 1;
+                player2score = 1;
                 playercheck++;
                 show(player2);
                 disable();
@@ -332,17 +337,18 @@ public class MainActivity extends AppCompatActivity {
 
     void show(final String playername) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("alter");
-        builder.setMessage(playername + " win");
-        builder.setPositiveButton("재시작", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder alter = new AlertDialog.Builder(this);
+        alter.setCancelable(false);
+        alter.setTitle("alter");
+        alter.setMessage(playername + " win");
+        alter.setPositiveButton("재시작", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setting();
                 finish();
             }
         });
-        builder.setNegativeButton("종료", new DialogInterface.OnClickListener() {
+        alter.setNegativeButton("종료", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setting();
@@ -351,6 +357,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myintent);
             }
         });
-        builder.show();
+        alter.show();
+    }
+    public void onBackPressed(){
+        // 기존 뒤로가기 버튼의 기능을 막기위해 주석처리 또는 삭제
+        // super.onBackPressed();
+
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지났으면 Toast Show
+        // 2000 milliseconds = 2 seconds
+        if(System.currentTimeMillis() > backKeyPressedTime + 2000){
+            backKeyPressedTime = System.currentTimeMillis();
+            toast = Toast.makeText(this, "\'뒤로\' 버튼을 반번더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지나지 않았으면 종료
+        // 현재 표시된 Toast 취소
+        if(System.currentTimeMillis() <= backKeyPressedTime + 2000){
+            finishAffinity();
+            System.runFinalization();
+            System.exit(0);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            toast.cancel();
+        }
     }
 }

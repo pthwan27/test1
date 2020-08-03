@@ -14,7 +14,8 @@
         android:fontFamily="@font/nanumbarunpenb"
         android:gravity="center"
         android:text="make answer!"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        app:fontFamily="@font/nanumbarunpenb" />
 
     <Space
         android:id="@+id/sp1"
@@ -52,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/player1text"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="ok" />
         </RelativeLayout>
 
@@ -78,7 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/player2text"
                 android:layout_centerHorizontal="true"
-                android:text="ok" />
+                android:text="ok"
+                android:fontFamily="@font/nanumbarunpenb"/>
 
         </RelativeLayout>
 
@@ -91,7 +94,7 @@
         android:layout_below="@id/LinearLayout"
         android:layout_centerHorizontal="true"
         android:enabled="false"
-        android:onClick="onClick"
-        android:text="START" />
+        android:text="START"
+        android:fontFamily="@font/nanumbarunpenb"/>
 
 </RelativeLayout>

@@ -1,8 +1,12 @@
 package com.example.createanswer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +23,7 @@ public class LastActivity extends AppCompatActivity {
         String playername = getIntent().getStringExtra("winner");
 
         TextView tv = findViewById(R.id.playertv);
-        tv.setText(playername);
+        tv.setText(playername + "승리! \n 뒤로가기를 2번 누르시면 종료됩니다" );
     }
     @Override
     public void onBackPressed(){
@@ -39,8 +43,15 @@ public class LastActivity extends AppCompatActivity {
         // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지나지 않았으면 종료
         // 현재 표시된 Toast 취소
         if(System.currentTimeMillis() <= backKeyPressedTime + 2000){
-            finish();
+            finishAffinity();
+            System.runFinalization();
+            System.exit(0);
+            android.os.Process.killProcess(android.os.Process.myPid());
             toast.cancel();
         }
+    }
+    public void onClick_01(View view){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 }

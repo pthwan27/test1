@@ -14,13 +14,17 @@ import android.widget.Toast;
 public class LoginActivity extends AppCompatActivity {
     String player1, player2;
 
-    Boolean check1 = false,check2 = false;
+    Boolean check1 = false, check2 = false;
 
     Button play1bt;
     Button play2bt;
 
     EditText play1et;
     EditText play2et;
+
+    private long backKeyPressedTime = 0;
+    private Toast toast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,9 +49,9 @@ public class LoginActivity extends AppCompatActivity {
                     play1et.setEnabled(false);
                     check1 = true;
                     play1bt.setText("cancel");
-                    if(nameCheck(player2)){
+                    if (nameCheck(player2)) {
                         startbt.setEnabled(true);
-                    }else{
+                    } else {
                         startbt.setEnabled(false);
                     }
                 } else if (play1et.isEnabled() && !nameCheck(player1)) {
@@ -68,9 +72,9 @@ public class LoginActivity extends AppCompatActivity {
                     play2et.setEnabled(false);
                     check2 = true;
                     play2bt.setText("cancel");
-                    if(nameCheck(player1)){
+                    if (nameCheck(player1)) {
                         startbt.setEnabled(true);
-                    }else{
+                    } else {
                         startbt.setEnabled(false);
                     }
                 } else if (play2et.isEnabled() && !nameCheck(player2)) {
@@ -82,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public void onClick(View v) {
@@ -91,8 +94,8 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("P1", player1);
             intent.putExtra("P2", player2);
             startActivity(intent);
-        } else{
-            Toast.makeText(this,"input player1, 2 name!!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "input player1, 2 name!!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -102,5 +105,30 @@ public class LoginActivity extends AppCompatActivity {
             check1 = true;
         }
         return check1;
+    }
+
+    public void onBackPressed(){
+        // 기존 뒤로가기 버튼의 기능을 막기위해 주석처리 또는 삭제
+        // super.onBackPressed();
+
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지났으면 Toast Show
+        // 2000 milliseconds = 2 seconds
+        if(System.currentTimeMillis() > backKeyPressedTime + 2000){
+            backKeyPressedTime = System.currentTimeMillis();
+            toast = Toast.makeText(this, "\'뒤로\' 버튼을 반번더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
+        // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지나지 않았으면 종료
+        // 현재 표시된 Toast 취소
+        if(System.currentTimeMillis() <= backKeyPressedTime + 2000){
+            finishAffinity();
+            System.runFinalization();
+            System.exit(0);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            toast.cancel();
+        }
     }
 }
