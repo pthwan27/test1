@@ -1,8 +1,10 @@
 package com.example.createanswer;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
     Button play1bt;
     Button play2bt;
+    Button startbt;
 
     EditText play1et;
     EditText play2et;
@@ -39,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         play2bt.setEnabled(true);
 
 
-        final Button startbt = (Button) findViewById(R.id.startbt);
+        startbt = (Button) findViewById(R.id.startbt);
         play1bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,9 +97,24 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("P1", player1);
             intent.putExtra("P2", player2);
             startActivity(intent);
+            check1=false; check2=false;
+            play1et.setEnabled(true);
+            play2et.setEnabled(true);
+            play1bt.setEnabled(true);
+            play1bt.setText("ok");
+            play2bt.setEnabled(true);
+            play2bt.setText("ok");
+            startbt.setEnabled(false);
+
         } else {
             Toast.makeText(this, "input player1, 2 name!!", Toast.LENGTH_SHORT).show();
         }
+    }
+    public void exitClick(View v){
+        finishAffinity();
+        System.runFinalization();
+        System.exit(0);
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     private Boolean nameCheck(String player) {
@@ -116,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
         // 2000 milliseconds = 2 seconds
         if(System.currentTimeMillis() > backKeyPressedTime + 2000){
             backKeyPressedTime = System.currentTimeMillis();
-            toast = Toast.makeText(this, "\'뒤로\' 버튼을 반번더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(this, "\'뒤로\' 버튼을 한번더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
@@ -129,6 +147,8 @@ public class LoginActivity extends AppCompatActivity {
             System.exit(0);
             android.os.Process.killProcess(android.os.Process.myPid());
             toast.cancel();
+
         }
     }
+
 }

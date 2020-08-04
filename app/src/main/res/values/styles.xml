@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Myalertstyle" parent="Theme.AppCompat.Light.Dialog">
+<!--        텍스트색상변경-->
+        <item name="colorAccent">@color/myblack</item>
+<!--        텍스트사이즈변경-->
+        <item name="android:textSize">15sp</item>
+<!--        모든다이어그램에 이 디자인 적용-->
+        <item name="android:alertDialogTheme">@style/Myalertstyle</item>
+<!--        버튼 꾸미긴데 확실하지않음-->
+        <item name="buttonBarButtonStyle">@color/colorPrimary</item>
+    </style>
+
 </resources>

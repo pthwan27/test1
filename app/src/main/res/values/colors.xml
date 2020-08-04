@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="mycolor1">#50B854</color>
-    <color name="mycolor2">#AB50B854</color>
+    <color name="mywhite">#ABFFFFFF</color>
+    <color name="myblack">#AA000000</color>
+    <color name="myred">#FD5B7D</color>
 </resources>

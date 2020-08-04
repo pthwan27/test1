@@ -18,15 +18,15 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    Long answer;//맞춰야할 정답
+    private Long answer;//맞춰야할 정답
 
-    String[] backArr = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "+", "-", "*", "/"};
+    private String[] backArr = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "+", "-", "*", "/"};
 
-    String[] frontArr = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"};
+    private String[] frontArr = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"};
 
     int[] onlyNumarr = new int[12];
 
-    int count = 3; //계산식을 완성했을때 계산이 되도록 ex) 1 + 3 누르면 계산이됌.
+    int count = 3; //계산식을 완성했을때 계산이 되도록 ex) 1 + 3, 3번 누르면 계산이됌.
     String calStr = ""; //계산식 저장
     int playercheck = 0; //2명의 플레이어가 있을때 누구의 순서인지 알기위해
     int player1score = 1; // 3점따면 승리하도록 설정
@@ -335,47 +335,49 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void show(final String playername) {
+    public void show(final String playername) {
 
-        AlertDialog.Builder alter = new AlertDialog.Builder(this);
-        alter.setCancelable(false);
-        alter.setTitle("alter");
-        alter.setMessage(playername + " win");
-        alter.setPositiveButton("재시작", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this, R.style.Myalertstyle);
+        alert.setCancelable(false);
+        alert.setTitle("경기종료");
+        alert.setMessage(playername + " win");
+        alert.setPositiveButton("다시하기", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setting();
                 finish();
+                dialog.dismiss();
             }
         });
-        alter.setNegativeButton("종료", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton("종료", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setting();
-                Intent myintent = new Intent(getApplicationContext(), LastActivity.class);
-                myintent.putExtra("winner", playername);
-                startActivity(myintent);
+                Intent lastintent = new Intent(getApplicationContext(), LastActivity.class);
+                lastintent.putExtra("winner", playername);
+                startActivity(lastintent);
             }
         });
-        alter.show();
+        alert.show();
     }
-    public void onBackPressed(){
+
+    public void onBackPressed() {
         // 기존 뒤로가기 버튼의 기능을 막기위해 주석처리 또는 삭제
         // super.onBackPressed();
 
         // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
         // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지났으면 Toast Show
         // 2000 milliseconds = 2 seconds
-        if(System.currentTimeMillis() > backKeyPressedTime + 2000){
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
-            toast = Toast.makeText(this, "\'뒤로\' 버튼을 반번더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(this, "\'뒤로\' 버튼을 한번더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
         // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
         // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지나지 않았으면 종료
         // 현재 표시된 Toast 취소
-        if(System.currentTimeMillis() <= backKeyPressedTime + 2000){
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
             finishAffinity();
             System.runFinalization();
             System.exit(0);
